@@ -64,7 +64,8 @@ if (!function_exists("getallheaders")) {
   }
 }
 
-define("PROXY_PREFIX", "http" . (isset($_SERVER['HTTPS']) ? "s" : "") . "://" . $_SERVER["SERVER_NAME"] . ($_SERVER["SERVER_PORT"] != 80 ? ":" . $_SERVER["SERVER_PORT"] : "") . $_SERVER["SCRIPT_NAME"] . "/");
+$ALWAYS_HTTPS = true;
+define("PROXY_PREFIX", "http" . (isset($_SERVER['HTTPS']) || $ALWAYS_HTTPS ? "s" : "") . "://" . $_SERVER["SERVER_NAME"] . ($_SERVER["SERVER_PORT"] != 80 ? ":" . $_SERVER["SERVER_PORT"] : "") . $_SERVER["SCRIPT_NAME"] . "/");
 
 //Makes an HTTP request via cURL, using request data that was passed directly to this script.
 function makeRequest($url) {
